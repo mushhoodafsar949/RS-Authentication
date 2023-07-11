@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NPMDevDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Users_RS2F_OTP">
+    <Key>
+      <PropertyRef Name="UserOTPId" />
+    </Key>
+    <Property Name="UserOTPId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OTP" Type="bigint" Nullable="false" />
+    <Property Name="UserId" Type="bigint" />
+    <Property Name="VerificationStatus" Type="bit" />
+    <Property Name="ISEXPIRED" Type="bit" />
+    <Property Name="IsDeleted" Type="bit" />
+    <Property Name="CreatedBy" Type="bigint" />
+    <Property Name="CreatedDate" Type="datetimeoffset" Precision="7" />
+    <Property Name="ExpiredDate" Type="datetimeoffset" Precision="7" />
+    <Property Name="ModifiedDate" Type="datetimeoffset" Precision="7" />
+    <Property Name="ModifiedBy" Type="bigint" />
+    <Property Name="MacAddress" Type="varchar" MaxLength="150" />
+    <Property Name="IPAddress" Type="varchar" MaxLength="150" />
+    <Property Name="Attempts" Type="int" />
+  </EntityType>
+  <Function Name="SP_authorization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Username" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="SP_CheckOTP_EXPIRY_Date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="pUserid" Type="bigint" Mode="In" />
+    <Parameter Name="pCode" Type="bigint" Mode="In" />
+  </Function>
+  <EntityContainer Name="NPMDevDBModelStoreContainer">
+    <EntitySet Name="Users_RS2F_OTP" EntityType="Self.Users_RS2F_OTP" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

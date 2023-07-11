@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NPMDevDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Users_RS2F_OTP">
+    <Key>
+      <PropertyRef Name="UserOTPId" />
+    </Key>
+    <Property Name="UserOTPId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OTP" Type="Int64" Nullable="false" />
+    <Property Name="UserId" Type="Int64" />
+    <Property Name="VerificationStatus" Type="Boolean" />
+    <Property Name="ISEXPIRED" Type="Boolean" />
+    <Property Name="IsDeleted" Type="Boolean" />
+    <Property Name="CreatedBy" Type="Int64" />
+    <Property Name="CreatedDate" Type="DateTimeOffset" Precision="7" />
+    <Property Name="ExpiredDate" Type="DateTimeOffset" Precision="7" />
+    <Property Name="ModifiedDate" Type="DateTimeOffset" Precision="7" />
+    <Property Name="ModifiedBy" Type="Int64" />
+    <Property Name="MacAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="IPAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Attempts" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="NPMDevDBEntities6" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Users_RS2F_OTP" EntityType="Self.Users_RS2F_OTP" />
+    <FunctionImport Name="SP_authorization" ReturnType="Collection(NPMDevDBModel.SP_authorization_Result)">
+      <Parameter Name="Username" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_CheckOTP_EXPIRY_Date" ReturnType="Collection(Int32)">
+      <Parameter Name="pUserid" Mode="In" Type="Int64" />
+      <Parameter Name="pCode" Mode="In" Type="Int64" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="SP_authorization_Result">
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Password" Nullable="true" />
+    <Property Type="String" Name="FirstName" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="LastName" Nullable="true" MaxLength="25" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+    <Property Type="Int64" Name="UserId" Nullable="false" />
+  </ComplexType>
+</Schema>

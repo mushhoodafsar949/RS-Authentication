@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NPMDevDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Users_RS2F_OTP">
+          <Key>
+            <PropertyRef Name="UserOTPId" />
+          </Key>
+          <Property Name="UserOTPId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OTP" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="VerificationStatus" Type="bit" />
+          <Property Name="ISEXPIRED" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetimeoffset" Precision="7" />
+          <Property Name="ExpiredDate" Type="datetimeoffset" Precision="7" />
+          <Property Name="ModifiedDate" Type="datetimeoffset" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="MacAddress" Type="varchar" MaxLength="150" />
+          <Property Name="IPAddress" Type="varchar" MaxLength="150" />
+          <Property Name="Attempts" Type="int" />
+        </EntityType>
+        <Function Name="SP_authorization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SP_CheckOTP_EXPIRY_Date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pUserid" Type="bigint" Mode="In" />
+          <Parameter Name="pCode" Type="bigint" Mode="In" />
+        </Function>
+        <EntityContainer Name="NPMDevDBModelStoreContainer">
+          <EntitySet Name="Users_RS2F_OTP" EntityType="Self.Users_RS2F_OTP" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NPMDevDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Users_RS2F_OTP">
+          <Key>
+            <PropertyRef Name="UserOTPId" />
+          </Key>
+          <Property Name="UserOTPId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OTP" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="VerificationStatus" Type="Boolean" />
+          <Property Name="ISEXPIRED" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTimeOffset" Precision="7" />
+          <Property Name="ExpiredDate" Type="DateTimeOffset" Precision="7" />
+          <Property Name="ModifiedDate" Type="DateTimeOffset" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="MacAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IPAddress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Attempts" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="NPMDevDBEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users_RS2F_OTP" EntityType="Self.Users_RS2F_OTP" />
+          <FunctionImport Name="SP_authorization" ReturnType="Collection(NPMDevDBModel.SP_authorization_Result)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CheckOTP_EXPIRY_Date" ReturnType="Collection(Int32)">
+            <Parameter Name="pUserid" Mode="In" Type="Int64" />
+            <Parameter Name="pCode" Mode="In" Type="Int64" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SP_authorization_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="true" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+          <Property Type="Int64" Name="UserId" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NPMDevDBModelStoreContainer" CdmEntityContainer="NPMDevDBEntities6">
+          <EntitySetMapping Name="Users_RS2F_OTP">
+            <EntityTypeMapping TypeName="NPMDevDBModel.Users_RS2F_OTP">
+              <MappingFragment StoreEntitySet="Users_RS2F_OTP">
+                <ScalarProperty Name="UserOTPId" ColumnName="UserOTPId" />
+                <ScalarProperty Name="OTP" ColumnName="OTP" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="VerificationStatus" ColumnName="VerificationStatus" />
+                <ScalarProperty Name="ISEXPIRED" ColumnName="ISEXPIRED" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ExpiredDate" ColumnName="ExpiredDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="MacAddress" ColumnName="MacAddress" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="Attempts" ColumnName="Attempts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_authorization" FunctionName="NPMDevDBModel.Store.SP_authorization">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NPMDevDBModel.SP_authorization_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_CheckOTP_EXPIRY_Date" FunctionName="NPMDevDBModel.Store.SP_CheckOTP_EXPIRY_Date" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
